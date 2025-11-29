@@ -3,7 +3,7 @@
 from pathlib import Path
 
 
-def read_input(day: int, year: int = 2024) -> str:
+def read_input(day: int, sample: bool, year: int = 2024) -> str:
     """Read input file for a given day.
 
     Args:
@@ -16,7 +16,10 @@ def read_input(day: int, year: int = 2024) -> str:
     Raises:
         FileNotFoundError: If the input file doesn't exist.
     """
-    input_path = Path(__file__).parent.parent / "inputs" / f"day{day:02d}.txt"
+    if sample:
+        input_path = Path(__file__).parent.parent / "inputs" / f"day{day:02d}_sample.txt"
+    else:
+        input_path = Path(__file__).parent.parent / "inputs" / f"day{day:02d}.txt"
     return input_path.read_text().strip()
 
 
