@@ -1,9 +1,3 @@
-"""Day 01: Template
-
-This is a template for solving Advent of Code puzzles.
-"""
-
-
 def parse_input(data: str) -> list[str]:
     """Parse the input data.
 
@@ -26,7 +20,21 @@ def part1(data: str) -> int:
         Solution to part 1
     """
     parsed = parse_input(data)
-    return 0
+
+    zero_count = 0
+    position = 50
+
+    for line in parsed:
+        num = int(line[1:].strip())
+        if line[0] == "L":
+            position = (position - num) % 100
+        elif line[0] == "R":
+            position = (position + num) % 100
+        
+        if position == 0:
+            zero_count += 1
+
+    return zero_count
 
 
 def part2(data: str) -> int:
@@ -39,7 +47,22 @@ def part2(data: str) -> int:
         Solution to part 2
     """
     parsed = parse_input(data)
-    return 0
+
+    zero_count = 0
+    position = 50
+
+    for line in parsed:
+        num = int(line[1:].strip())
+
+        if line[0] == "L":
+            zero_count += (position - 1) // 100 - (position - num - 1) // 100
+            position = (position - num) % 100
+
+        elif line[0] == "R":
+            zero_count += (position + num) // 100
+            position = (position + num) % 100
+            
+    return zero_count
 
 
 if __name__ == "__main__":
