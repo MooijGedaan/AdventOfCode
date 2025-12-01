@@ -16,7 +16,7 @@ def sample_input(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     # Patch the utils module to use our tmp path
     monkeypatch.setattr(
         "aoc.utils.read_input",
-        lambda day, year=2024: (inputs_dir / f"day{day:02d}.txt").read_text().strip()
+        lambda day, sample=False, year=2024: (inputs_dir / f"day{day:02d}.txt").read_text().strip()
     )
     return inputs_dir
 
@@ -34,7 +34,7 @@ def test_read_lines_returns_list(sample_input: Path, monkeypatch: pytest.MonkeyP
     from aoc import utils
     monkeypatch.setattr(
         utils, "read_input",
-        lambda day, year=2024: (sample_input / f"day{day:02d}.txt").read_text().strip()
+        lambda day, sample=False, year=2024: (sample_input / f"day{day:02d}.txt").read_text().strip()
     )
 
     result = utils.read_lines(1)
@@ -46,7 +46,7 @@ def test_read_ints_returns_integers(sample_input: Path, monkeypatch: pytest.Monk
     from aoc import utils
     monkeypatch.setattr(
         utils, "read_input",
-        lambda day, year=2024: (sample_input / f"day{day:02d}.txt").read_text().strip()
+        lambda day, sample=False, year=2024: (sample_input / f"day{day:02d}.txt").read_text().strip()
     )
 
     result = utils.read_ints(1)

@@ -88,8 +88,6 @@ def part2(data: str) -> int:
     """
     parsed_as_rows = parse_as_rows(data)
 
-    print(parsed_as_rows)
-
     total = 0
 
     for id, line in enumerate(parsed_as_rows):

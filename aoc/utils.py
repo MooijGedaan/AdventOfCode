@@ -3,11 +3,12 @@
 from pathlib import Path
 
 
-def read_input(day: int, sample: bool, year: int = 2024) -> str:
+def read_input(day: int, sample: bool = False, year: int = 2024) -> str:
     """Read input file for a given day.
 
     Args:
         day: The day number (1-25)
+        sample: Whether to read the sample input
         year: The year of the puzzle (default: 2024)
 
     Returns:
@@ -16,10 +17,8 @@ def read_input(day: int, sample: bool, year: int = 2024) -> str:
     Raises:
         FileNotFoundError: If the input file doesn't exist.
     """
-    if sample:
-        input_path = Path(__file__).parent.parent / "inputs" / f"day{day:02d}_sample.txt"
-    else:
-        input_path = Path(__file__).parent.parent / "inputs" / f"day{day:02d}.txt"
+    filename = f"day{day:02d}_sample.txt" if sample else f"day{day:02d}.txt"
+    input_path = Path(__file__).parent.parent / "inputs" / f"year{year}" / filename
     return input_path.read_text().strip()
 
 
@@ -33,7 +32,7 @@ def read_lines(day: int, year: int = 2024) -> list[str]:
     Returns:
         List of lines from the input file.
     """
-    return read_input(day, year).splitlines()
+    return read_input(day, sample=False, year=year).splitlines()
 
 
 def read_ints(day: int, year: int = 2024) -> list[int]:
