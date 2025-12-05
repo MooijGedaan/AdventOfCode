@@ -19,19 +19,20 @@ def part1(data: str) -> int:
     Returns:
         Solution to part 1
     """
-    parsed = parse_input(data)
+    parsed = parse_input(data)[0]
 
-    total = 0
+    floor = 0
 
-    for bank in parsed:
-        first_digit = max(bank[:-1])
-        first_idx = bank.find(first_digit)
-        second_digit = max(bank[first_idx + 1:])
-        total += int(first_digit + second_digit)
+    for par in parsed:
+        if par == "(":
+            floor += 1
+        elif par == ")":
+            floor -= 1
+    
+    return floor
 
-    return total
 
-def part2(data: str) -> int:
+def part2(data: str) -> int | None:
     """Solve part 2 of the puzzle.
 
     Args:
@@ -40,26 +41,20 @@ def part2(data: str) -> int:
     Returns:
         Solution to part 2
     """
-    parsed = parse_input(data)
-    total = 0
+    parsed = parse_input(data)[0]
 
-    for bank in parsed:
-        result = ""
-        prev_idx = -1
-        for num in range(12):
-            needed_after = 11 - num
-            start = prev_idx + 1
-            end = len(bank) - needed_after
-            window = bank[start:end]
+    floor = 0
 
-            maximum_number = max(window)
-            max_idx = bank.find(maximum_number, start, end)
-            result += maximum_number
-            prev_idx = max_idx
+    for id, par in enumerate(parsed):
+        if par == "(":
+            floor += 1
+        elif par == ")":
+            floor -= 1
 
-        total += int(result)
-
-    return total
+        if floor == -1:
+            return id
+    
+    return None
 
 if __name__ == "__main__":
     from aoc.utils import read_input

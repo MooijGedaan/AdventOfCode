@@ -94,7 +94,16 @@ def check_substring(s: str) -> bool:
 
 if __name__ == "__main__":
     from aoc.utils import read_input
+    import os
 
-    data = read_input(2, sample=False, year=2025)
-    # print(f"Part 1: {part1(data)}")
+    # Get day number
+    day_str = os.path.splitext(os.path.basename(__file__))[0]
+    day = int(day_str[-2:])
+
+    # Get year number
+    year_dir = os.path.basename(os.path.dirname(__file__))
+    year = int(year_dir[-4:])
+
+    data = read_input(day, year, False)
+    print(f"Part 1: {part1(data)}")
     print(f"Part 2: {part2(data)}")

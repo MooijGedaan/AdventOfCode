@@ -3,7 +3,7 @@
 from pathlib import Path
 
 
-def read_input(day: int, sample: bool = False, year: int = 2024) -> str:
+def read_input(day: int, year: int, sample: bool = False) -> str:
     """Read input file for a given day.
 
     Args:
